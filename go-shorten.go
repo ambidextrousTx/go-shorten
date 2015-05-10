@@ -4,17 +4,23 @@ import (
 	"fmt"
 )
 
-/* Declate the return array in the signature itself.
-The function converts between bases and reverses the
-result before returning it */
-func convert(key, alphabet uint16) (digits []uint16){
-    for num := key; num > 0; num = num / key {
-        remainder := num % key
+/* Reverse an array of digits. Implemented natively for now, although
+there might be an in-built library function that does this already */
+func reverse(digits []uint16) (reversed []uint16) {
+    for i := len(digits) - 1; i >= 0; i-- {
+		reversed = append(reversed, digits[i])
+	}
+	return
+}
+
+/* Declare the return array in the signature itself. The function
+converts between bases and reverses the result before returning it */
+func convert(key, alphabetSize uint16) (digits []uint16){
+    for num := key; num > 0; num = num / alphabetSize {
+        remainder := num % alphabetSize
         digits = append(digits, remainder)
     }
-    // TODO: Reverse digits
-    // TODO: Fix bugs
-    return
+    return reverse(digits)
 }
 
 func main() {
