@@ -37,33 +37,24 @@ func mapToAlphabet(digits []int, alphabetMap map[int]rune) string {
     return shortUrl
 }
 
+/* Create entries in a map based on what kind of letters we are
+considering at a given time */
+func populateAlphabetMap(alphabetMap map[int]rune, lowerLimit, upperLimit int, currentEntry rune) {
+    for i := lowerLimit; i < upperLimit; i++ {
+        alphabetMap[i] = currentEntry
+        currentEntry++
+    }
+}
+
 /* Create a map that maps our alphabet range numbers 0-62 onto
 a-z, A-Z, and 0-9 respectively */
-// TODO: Clean this method up
 func createAlphabetMap(lowercaseLetter rune, uppercaseLetter rune, digit rune, alphabetSize int) map[int]rune {
     var alphabetMap map[int]rune = make(map[int]rune, alphabetSize)
-    var currentEntry rune
-
-    currentEntry = lowercaseLetter
-    for i := 0; i < 26; i++ {
-        alphabetMap[i] = currentEntry
-        currentEntry++
-    }
-
-    currentEntry = uppercaseLetter
-    for i := 26; i < 52; i++ {
-        alphabetMap[i] = currentEntry
-        currentEntry++
-    }
-
-    currentEntry = digit
-    for i := 52; i < 62; i++ {
-        alphabetMap[i] = currentEntry
-        currentEntry++
-    }
+    populateAlphabetMap(alphabetMap, 0, 26, lowercaseLetter)
+    populateAlphabetMap(alphabetMap, 26, 52, uppercaseLetter)
+    populateAlphabetMap(alphabetMap, 52, 62, digit)
 
     return alphabetMap
-
 }
 
 func main() {
