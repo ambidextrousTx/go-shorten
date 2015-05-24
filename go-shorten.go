@@ -37,19 +37,49 @@ func mapToAlphabet(digits []int, alphabetMap map[int]rune) string {
     return shortUrl
 }
 
+/* Create a map that maps our alphabet range numbers 0-62 onto
+a-z, A-Z, and 0-9 respectively */
+// TODO: Clean this method up
+func createAlphabetMap(lowercaseLetter rune, uppercaseLetter rune, digit rune, alphabetSize int) map[int]rune {
+    var alphabetMap map[int]rune = make(map[int]rune, alphabetSize)
+    var currentEntry rune
+
+    currentEntry = lowercaseLetter
+    for i := 0; i < 26; i++ {
+        alphabetMap[i] = currentEntry
+        currentEntry++
+    }
+
+    currentEntry = uppercaseLetter
+    for i := 26; i < 52; i++ {
+        alphabetMap[i] = currentEntry
+        currentEntry++
+    }
+
+    currentEntry = digit
+    for i := 52; i < 62; i++ {
+        alphabetMap[i] = currentEntry
+        currentEntry++
+    }
+
+    return alphabetMap
+
+}
+
 func main() {
     fmt.Println("Starting the URL shortening procedure")
     const key int = 125
     const alphabetSize int = 62
-    var alphabetMap map[int]rune = make(map[int]rune, alphabetSize)
 
-    var letter rune = 97
-    for i := 0; i < 26; i++ {
-        alphabetMap[i] = letter
-        letter++
-    }
+    var lowercaseLetter rune = 97
+    var uppercaseLetter rune = 65
+    var digit rune = 48
+
+    alphabetMap := createAlphabetMap(lowercaseLetter, uppercaseLetter, digit, alphabetSize)
 
     fmt.Printf("%c", alphabetMap[25])
+    fmt.Printf("%c", alphabetMap[26])
+    fmt.Printf("%c", alphabetMap[54])
     fmt.Println()
 
     fmt.Println("Converted 125_10 to X_62,", convert(key, alphabetSize))
