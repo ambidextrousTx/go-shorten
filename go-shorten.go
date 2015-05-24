@@ -18,7 +18,7 @@ func reverse(digits []int) (reversed []int) {
 
 /* Declare the return array in the signature itself. The function
 converts between bases and reverses the result before returning it */
-func convert(key, alphabetSize int) (digits []int){
+func convert(key, alphabetSize int) (digits []int) {
     for num := key; num > 0; num = num / alphabetSize {
         remainder := num % alphabetSize
         digits = append(digits, remainder)
@@ -28,11 +28,10 @@ func convert(key, alphabetSize int) (digits []int){
 
 /* Map the indices obtained from the convert and reverse functions
 above into our alphabet. The alphabet is a-zA-Z0-9 */
-func mapToAlphabet(digits []int, alphabetMap map[int]rune) string {
-    var shortUrl string
+func mapToAlphabet(digits []int, alphabetMap map[int]rune) []rune {
+    var shortUrl []rune
     for _, digit := range digits {
-        //shortUrl += alphabetMap[digit]
-        fmt.Println(digit)
+        shortUrl = append(shortUrl, alphabetMap[digit])
     }
     return shortUrl
 }
@@ -68,11 +67,11 @@ func main() {
 
     alphabetMap := createAlphabetMap(lowercaseLetter, uppercaseLetter, digit, alphabetSize)
 
-    fmt.Printf("%c", alphabetMap[25])
-    fmt.Printf("%c", alphabetMap[26])
-    fmt.Printf("%c", alphabetMap[54])
-    fmt.Println()
-
     fmt.Println("Converted 125_10 to X_62,", convert(key, alphabetSize))
-    fmt.Println(mapToAlphabet(convert(key, alphabetSize), alphabetMap))
+    var result []rune
+    result = mapToAlphabet(convert(key, alphabetSize), alphabetMap)
+    for _, resultRune := range result {
+        fmt.Printf("%c", resultRune)
+    }
+    fmt.Println()
 }
