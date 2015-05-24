@@ -68,10 +68,12 @@ func main() {
     alphabetMap := createAlphabetMap(lowercaseLetter, uppercaseLetter, digit, alphabetSize)
 
     fmt.Println("Converted 125_10 to X_62,", convert(key, alphabetSize))
+    fmt.Println("The following is the shortened resource; append it to an IP")
     var result []rune
     result = mapToAlphabet(convert(key, alphabetSize), alphabetMap)
     for _, resultRune := range result {
         fmt.Printf("%c", resultRune)
     }
     fmt.Println()
+    fmt.Println("Done")
 }
