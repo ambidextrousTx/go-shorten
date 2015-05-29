@@ -58,7 +58,9 @@ func createAlphabetMap(lowercaseLetter rune, uppercaseLetter rune, digit rune, a
 
 func main() {
     fmt.Println("Starting the URL shortening procedure")
-    const key int = 125
+    fmt.Println("Enter the key =>")
+    var key int
+    fmt.Scanf("%d", &key)
     const alphabetSize int = 62
 
     var lowercaseLetter rune = 97
