@@ -29,11 +29,11 @@ func convert(key, alphabetSize int) (digits []int) {
 /* Map the indices obtained from the convert and reverse functions
 above into our alphabet. The alphabet is a-zA-Z0-9 */
 func mapToAlphabet(digits []int, alphabetMap map[int]rune) []rune {
-	var shortUrl []rune
+	var shortURL []rune
 	for _, digit := range digits {
-		shortUrl = append(shortUrl, alphabetMap[digit])
+		shortURL = append(shortURL, alphabetMap[digit])
 	}
-	return shortUrl
+	return shortURL
 }
 
 /* Create entries in a map based on what kind of letters we are
@@ -48,7 +48,7 @@ func populateAlphabetMap(alphabetMap map[int]rune, lowerLimit, upperLimit int, c
 /* Create a map that maps our alphabet range numbers 0-62 onto
 a-z, A-Z, and 0-9 respectively */
 func createAlphabetMap(lowercaseLetter rune, uppercaseLetter rune, digit rune, alphabetSize int) map[int]rune {
-	var alphabetMap map[int]rune = make(map[int]rune, alphabetSize)
+	var alphabetMap = make(map[int]rune, alphabetSize)
 	populateAlphabetMap(alphabetMap, 0, 26, lowercaseLetter)
 	populateAlphabetMap(alphabetMap, 26, 52, uppercaseLetter)
 	populateAlphabetMap(alphabetMap, 52, 62, digit)
